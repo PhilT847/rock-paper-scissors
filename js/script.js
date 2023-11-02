@@ -1,6 +1,5 @@
 /* script.js */
 
-
 let playerHealth = 5;
 let computerHealth = 5;
 
@@ -25,21 +24,21 @@ function generateContent() {
 
 function generateHealthBars() {
 
-    const playerHealthContainer = document.createElement("div");
-    playerHealthContainer.style.display = "flex";
-    playerHealthContainer.style.padding = "10px";
-    playerHealthContainer.style.flexBasis = "50px";
-    playerHealthContainer.style.width = "200px";
+    playerHealthBar.style.display = "flex";
+    playerHealthBar.style.padding = "10px";
+    playerHealthBar.style.flexBasis = "50px";
+    playerHealthBar.style.width = "200px";
 
-    const computerHealthContainer = document.createElement("div");
-    computerHealthContainer.style.display = "flex";
-    computerHealthContainer.style.padding = "10px";
-    computerHealthContainer.style.flexBasis = "50px";
-    computerHealthContainer.style.width = "200px";
+    computerHealthBar.style.display = "flex";
+    computerHealthBar.style.padding = "10px";
+    computerHealthBar.style.flexBasis = "50px";
+    computerHealthBar.style.width = "200px";
 
-    playerContainer.appendChild(playerHealthContainer);
-    computerContainer.appendChild(computerHealthContainer);
+    // Add health bar to each container
+    playerContainer.appendChild(playerHealthBar);
+    computerContainer.appendChild(computerHealthBar);
 
+    // Create health bars from health pieces = total health
     for(let i = 0; i < (playerHealth + computerHealth); i++) {
 
         const healthPiece = document.createElement("div");
@@ -51,11 +50,11 @@ function generateHealthBars() {
         // Add to both player and computer sides
         if(i < playerHealth){
 
-            playerHealthContainer.appendChild(healthPiece);
+            playerHealthBar.appendChild(healthPiece);
         }
         else {
 
-            computerHealthContainer.appendChild(healthPiece);
+            computerHealthBar.appendChild(healthPiece);
         }
     }
 }
@@ -77,6 +76,7 @@ function updateSelectionTextSection() {
 }
 
 function updateHealthBars() {
+
 
 }
 
