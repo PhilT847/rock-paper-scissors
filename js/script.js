@@ -1,7 +1,5 @@
 /* script.js */
 
-game();
-
 function game() {
 
     let playerPoints = 0;

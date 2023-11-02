@@ -1,1 +1,37 @@
 /* style.css */
+
+body {
+    font-family: Constantia, "Lucida Bright", Lucidabright, 
+                "Lucida Serif", Lucida, "DejaVu Serif", 
+                "Bitstream Vera Serif", "Liberation Serif", 
+                Georgia, serif;
+    color: #1F2937;
+    min-height: 100vh;
+    margin: 0; /* Remove default margin */
+    display: flex; /* Align sections vertically */
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+.header-section, .select-text-section, 
+.combat-section, .footer-section {
+    padding: 12px 15%;
+}
+
+.header-section {
+    background-color: red;
+}
+
+.select-text-section {
+    background-color: blue;
+}
+
+.combat-section {
+    background-color: green;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-section {
+    background-color: yellow;
+}
