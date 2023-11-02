@@ -1,5 +1,31 @@
 /* script.js */
 
+let playerHealth = 5;
+let computerHealth = 5;
+
+const selectionContainer = document.querySelector("#select-text-section");
+
+updateSelectionTextSection();
+
+function updateSelectionTextSection() {
+
+    if(playerHealth == 0) {
+
+        selectionContainer.setAttribute("background-color", "green");
+        selectionContainer.textContent = "YOU WIN!";
+    }
+    else if(computerHealth == 0) {
+
+        selectionContainer.setAttribute("background-color", "red");
+        selectionContainer.textContent = "YOU LOSE!";
+    }
+    else {
+
+        selectionContainer.setAttribute("background-color", "black");
+        selectionContainer.textContent = "Choose your weapon!";
+    }
+}
+
 function game() {
 
     let playerPoints = 0;
@@ -20,7 +46,7 @@ function game() {
         else if(result == "computer") {
             computerPoints++;
         }
-        else { /* Tie or other result; repeat */
+        else { // Tie or other result; repeat
             i--;
         }
     }
@@ -64,6 +90,7 @@ function playRound(playerChoice, computerChoice) {
     else {
 
         switch(playerChoice){
+
             case "rock":
                 switch(computerChoice){
                     case "paper":
@@ -71,6 +98,7 @@ function playRound(playerChoice, computerChoice) {
                     case "scissors":
                         return "player";
                 }
+
             case "paper":
                 switch(computerChoice){
                     case "scissors":
@@ -78,6 +106,7 @@ function playRound(playerChoice, computerChoice) {
                     case "rock":
                         return "player";
                 }
+
             case "scissors":
                 switch(computerChoice){
                     case "rock":
@@ -85,6 +114,7 @@ function playRound(playerChoice, computerChoice) {
                     case "paper":
                         return "player";
                 }
+
             default:
                 return "tie";
         }

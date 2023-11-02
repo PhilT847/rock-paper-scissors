@@ -13,25 +13,35 @@ body {
     justify-content: stretch;
 }
 
-.header-section, .select-text-section, 
-.combat-section, .footer-section {
+#header-section, #select-text-section, 
+#combat-section, #footer-section {
     padding: 12px 15%;
 }
 
-.header-section {
+#header-section, #select-text-section {
+
+    text-align: center;
+}
+
+#header-section {
     background-color: red;
 }
 
-.select-text-section {
-    background-color: blue;
+#select-text-section {
+    background-color: black;
+    color: white;
 }
 
-.combat-section {
+#combat-section {
     background-color: green;
     display: flex;
     justify-content: space-between;
 }
 
-.footer-section {
+#combat-text {
+    
+}
+
+#footer-section {
     background-color: yellow;
 }
