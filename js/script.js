@@ -1,29 +1,83 @@
 /* script.js */
 
+
 let playerHealth = 5;
 let computerHealth = 5;
 
 const selectionContainer = document.querySelector("#select-text-section");
+const selectionText = document.createElement("div");
 
-updateSelectionTextSection();
+const playerContainer = document.querySelector("#combat-left");
+const computerContainer = document.querySelector("#combat-right");
+const playerHealthBar = document.createElement("div");
+const computerHealthBar = document.createElement("div");
+
+generateContent();
+
+function generateContent() {
+
+    selectionContainer.appendChild(selectionText);
+
+    generateHealthBars();
+
+    updateSelectionTextSection();
+}
+
+function generateHealthBars() {
+
+    const playerHealthContainer = document.createElement("div");
+    playerHealthContainer.style.display = "flex";
+    playerHealthContainer.style.padding = "10px";
+    playerHealthContainer.style.flexBasis = "50px";
+    playerHealthContainer.style.width = "200px";
+
+    const computerHealthContainer = document.createElement("div");
+    computerHealthContainer.style.display = "flex";
+    computerHealthContainer.style.padding = "10px";
+    computerHealthContainer.style.flexBasis = "50px";
+    computerHealthContainer.style.width = "200px";
+
+    playerContainer.appendChild(playerHealthContainer);
+    computerContainer.appendChild(computerHealthContainer);
+
+    for(let i = 0; i < (playerHealth + computerHealth); i++) {
+
+        const healthPiece = document.createElement("div");
+        healthPiece.classList.add("health-piece");
+        healthPiece.style.backgroundColor = "rgb(0,255,0)";
+        healthPiece.style.border = "2px solid black";
+        healthPiece.style.flex = "1";
+
+        // Add to both player and computer sides
+        if(i < playerHealth){
+
+            playerHealthContainer.appendChild(healthPiece);
+        }
+        else {
+
+            computerHealthContainer.appendChild(healthPiece);
+        }
+    }
+}
 
 function updateSelectionTextSection() {
 
     if(playerHealth == 0) {
 
-        selectionContainer.setAttribute("background-color", "green");
-        selectionContainer.textContent = "YOU WIN!";
+        selectionText.textContent = "YOU WIN!";
     }
     else if(computerHealth == 0) {
 
-        selectionContainer.setAttribute("background-color", "red");
-        selectionContainer.textContent = "YOU LOSE!";
+        selectionText.textContent = "YOU LOSE!";
     }
     else {
 
-        selectionContainer.setAttribute("background-color", "black");
-        selectionContainer.textContent = "Choose your weapon!";
+        selectionText.textContent = "Choose your weapon!";
     }
+}
+
+function updateHealthBars() {
+
 }
 
 function game() {

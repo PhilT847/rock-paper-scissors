@@ -1,47 +1,92 @@
 /* style.css */
 
 body {
-    font-family: Constantia, "Lucida Bright", Lucidabright, 
-                "Lucida Serif", Lucida, "DejaVu Serif", 
-                "Bitstream Vera Serif", "Liberation Serif", 
-                Georgia, serif;
-    color: #1F2937;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     min-height: 100vh;
     margin: 0; /* Remove default margin */
     display: flex; /* Align sections vertically */
+    background-color: black;
+    color: white;
     flex-direction: column;
     justify-content: stretch;
 }
 
 #header-section, #select-text-section, 
 #combat-section, #footer-section {
-    padding: 12px 15%;
+    padding: 96px 10%;
 }
 
-#header-section, #select-text-section {
-
+#header-section, #select-text-section,
+#footer-section {
+    padding-top: 24px;
+    padding-bottom: 24px;
     text-align: center;
 }
 
 #header-section {
-    background-color: red;
+    font-size: 36px;
+    font-weight: 700;
 }
 
-#select-text-section {
-    background-color: black;
-    color: white;
+#select-text-section, #footer-section {
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+    background-color: white;
 }
 
 #combat-section {
-    background-color: green;
     display: flex;
     justify-content: space-between;
 }
 
-#combat-text {
+#combat-left, #combat-right,
+#combat-mid-textbox {
+    color: white;
+    border: 4px solid white;
+    border-radius: 12px;
+}
+
+#combat-left, #combat-right {
+    flex-basis: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.combat-health-bar {
+    flex-basis: 200px;
+    display: flex;
+}
+
+#combat-last-weapon {
+
+}
+
+#combat-left {
+
+}
+
+#combat-mid {
+    flex-basis: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 48px;
+}
+
+#combat-mid-weapon-select {
+
+}
+
+#combat-mid-textbox {
+    flex-basis: 300px;
+}
+
+#combat-right {
     
 }
 
 #footer-section {
-    background-color: yellow;
+
 }
