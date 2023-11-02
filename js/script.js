@@ -24,19 +24,24 @@ function generateContent() {
 
 function generateHealthBars() {
 
-    playerHealthBar.style.display = "flex";
-    playerHealthBar.style.padding = "10px";
-    playerHealthBar.style.flexBasis = "50px";
-    playerHealthBar.style.width = "200px";
+    // Add containers with text + health bar underneath
+    const playerHealthContainer = document.createElement("div");
+    playerHealthContainer.classList.add("health-container");
+    playerHealthContainer.textContent = "Health";
 
-    computerHealthBar.style.display = "flex";
-    computerHealthBar.style.padding = "10px";
-    computerHealthBar.style.flexBasis = "50px";
-    computerHealthBar.style.width = "200px";
+    const computerHealthContainer = document.createElement("div");
+    computerHealthContainer.classList.add("health-container");
+    computerHealthContainer.textContent = "Health";
+
+    playerHealthBar.classList.add("health-bar");
+    computerHealthBar.classList.add("health-bar");
 
     // Add health bar to each container
-    playerContainer.appendChild(playerHealthBar);
-    computerContainer.appendChild(computerHealthBar);
+    playerContainer.appendChild(playerHealthContainer);
+    playerHealthContainer.appendChild(playerHealthBar);
+
+    computerContainer.appendChild(computerHealthContainer);
+    computerHealthContainer.appendChild(computerHealthBar);
 
     // Create health bars from health pieces = total health
     for(let i = 0; i < (playerHealth + computerHealth); i++) {
@@ -44,8 +49,6 @@ function generateHealthBars() {
         const healthPiece = document.createElement("div");
         healthPiece.classList.add("health-piece");
         healthPiece.style.backgroundColor = "rgb(0,255,0)";
-        healthPiece.style.border = "2px solid black";
-        healthPiece.style.flex = "1";
 
         // Add to both player and computer sides
         if(i < playerHealth){

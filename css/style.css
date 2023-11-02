@@ -48,15 +48,35 @@ body {
 }
 
 #combat-left, #combat-right {
+    font-size: 28px;
+    font-weight: 600;
     flex-basis: 200px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 18px;
 }
 
-.combat-health-bar {
-    flex-basis: 200px;
+.health-container {
+    font-size: 18px;
+    text-align: center;
+    margin: 12px;
     display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.health-bar {
+    flex-basis: 50px;
+    width: 200px;
+    border: 4px solid white;
+    display: flex;
+}
+
+.health-piece {
+    border: 2px solid black;
+    flex: 1;
 }
 
 #combat-last-weapon {
