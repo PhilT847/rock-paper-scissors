@@ -97,6 +97,7 @@ function generateSelectionButtons() {
         choiceImage.classList.add("choice-image");
 
         switch(i) {
+
             case 0:
                 choiceImage.src = "./images/rock.png";
                 choiceImage.alt = "Choose rock";
@@ -121,6 +122,7 @@ function generateSelectionButtons() {
                 let playerChoice = "";
 
                 switch(i) {
+
                     case 0:
                         playerChoice = "rock";
                         break;
@@ -221,6 +223,7 @@ function getComputerChoice() {
     let rand = Math.floor(Math.random() * 3);
 
     switch(rand) {
+        
         case 0:
             return "rock";
         case 1:
@@ -244,7 +247,9 @@ function playRound(playerChoice, computerChoice) {
         switch(playerChoice){
 
             case "rock":
+
                 switch(computerChoice){
+
                     case "paper":
                         result = "computer";
                         break;
@@ -255,7 +260,9 @@ function playRound(playerChoice, computerChoice) {
                 break;
 
             case "paper":
+
                 switch(computerChoice){
+
                     case "scissors":
                         result = "computer";
                         break;
@@ -266,7 +273,9 @@ function playRound(playerChoice, computerChoice) {
                 break;
 
             case "scissors":
+
                 switch(computerChoice){
+
                     case "rock":
                         result = "computer";
                         break;
