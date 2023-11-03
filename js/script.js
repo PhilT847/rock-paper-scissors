@@ -21,11 +21,15 @@ const computerHealthArray = [];
 
 const btnList = document.querySelector("ul");
 
+const gameTextBox = document.querySelector("#combat-mid-textbox");
+const gameText = document.createElement("ul");
+
 game();
 
 function generateContent() {
 
     selectionContainer.appendChild(selectionText);
+    gameTextBox.appendChild(gameText);
 
     generateHealthBars();
 
