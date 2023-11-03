@@ -1,13 +1,13 @@
 /* script.js */
 
+const PLAYER_HEALTH_MAX = 5;
+const COMPUTER_HEALTH_MAX = 5;
 const CRITICAL_HEALTH_POINT = 0.33;
 
 let gameActive = false;
 
-let playerHealthMax = 5;
-let playerHealthCurrent = playerHealthMax;
-let computerHealthMax = 5;
-let computerHealthCurrent = computerHealthMax;
+let playerHealthCurrent = PLAYER_HEALTH_MAX;
+let computerHealthCurrent = COMPUTER_HEALTH_MAX;
 
 const selectionContainer = document.querySelector("#select-text-section");
 const selectionText = document.createElement("div");
@@ -62,12 +62,12 @@ function generateHealthBars() {
     computerHealthContainer.appendChild(computerHealthBar);
 
     // Add all necessary health pieces
-    for(let i = 0; i < playerHealthMax; i++){
+    for(let i = 0; i < PLAYER_HEALTH_MAX; i++){
 
         generateHealthPiece(playerHealthBar, playerHealthArray, i);
     }
 
-    for(let i = 0; i < computerHealthMax; i++){
+    for(let i = 0; i < COMPUTER_HEALTH_MAX; i++){
 
         generateHealthPiece(computerHealthBar, computerHealthArray, i);
     }
@@ -169,6 +169,32 @@ function colorHealthBar(healthCurrent, healthArr) {
     }
 }
 
+function addText(addText) {
+
+    const newTextItem = document.createElement("li");
+    newTextItem.classList.add("combat-mid-text-main");
+    newTextItem.textContent = addText;
+
+    gameText.insertBefore(newTextItem, gameText.firstChild);
+
+    // Set older text to gray
+    if(gameText.childNodes.length > 1) {
+
+        gameText.childNodes[1].classList.remove("combat-mid-text-main");
+        gameText.childNodes[1].classList.add("combat-mid-text-secondary");
+    }
+
+    // Remove text beyond the 11th
+    if(gameText.childNodes.length > 10) {
+
+        gameText.childNodes[gameText.childNodes.length - 1].remove();
+    }
+}
+
+function colorTextBox() {
+
+}
+
 function getComputerChoice() {
 
     let rand = Math.floor(Math.random() * 3);
@@ -186,6 +212,7 @@ function getComputerChoice() {
 function playRound(playerChoice, computerChoice) {
 
     let result = "";
+    let resultText = playerChoice + " vs " + computerChoice + ", ";
 
     if(playerChoice == computerChoice) {
 
@@ -237,15 +264,19 @@ function playRound(playerChoice, computerChoice) {
     if(result == "player") {
 
         computerHealthCurrent--;
+        resultText += "player wins!";
     }
     else if(result == "computer") {
 
         playerHealthCurrent--;
+        resultText += "computer wins!";
     }
     else {
 
-        console.log("hey");
+        resultText += "tie!";
     }
+
+    addText(resultText);
 
     updateHealthBars();
 
