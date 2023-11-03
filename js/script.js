@@ -4,7 +4,7 @@ const CRITICAL_HEALTH_POINT = 0.33;
 
 let gameActive = false;
 
-let playerHealthMax = 12;
+let playerHealthMax = 5;
 let playerHealthCurrent = playerHealthMax;
 let computerHealthMax = 5;
 let computerHealthCurrent = computerHealthMax;

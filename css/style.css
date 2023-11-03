@@ -15,13 +15,10 @@ ul {
     padding: 24px;
     margin: 0px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     list-style-type: none;
     gap: 20px;
-}
-
-ul li {
-    padding: 0px;
 }
 
 button {
@@ -56,6 +53,7 @@ button {
 #combat-section {
     flex-basis: 650px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
