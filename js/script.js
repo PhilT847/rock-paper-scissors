@@ -92,6 +92,27 @@ function generateSelectionButtons() {
 
         const choiceButton = document.createElement("button");
 
+        // Add image to button
+        const choiceImage = document.createElement("img");
+        choiceImage.classList.add("choice-image");
+
+        switch(i) {
+            case 0:
+                choiceImage.src = "./images/rock.png";
+                choiceImage.alt = "Choose rock";
+                break;
+            case 1:
+                choiceImage.src = "./images/paper.png";
+                choiceImage.alt = "Choose paper";
+                break;
+            case 2:
+                choiceImage.src = "./images/scissors.png";
+                choiceImage.alt = "Choose scissors";
+                break;
+        }
+
+        choiceButton.appendChild(choiceImage);
+
         // Each button plays a different hand
         choiceButton.addEventListener("click", () => {
 
