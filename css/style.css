@@ -8,7 +8,25 @@ body {
     background-color: black;
     color: white;
     flex-direction: column;
-    justify-content: stretch;
+    justify-content: space-between;
+}
+
+ul {
+    padding: 24px;
+    margin: 0px;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    gap: 20px;
+}
+
+ul li {
+    padding: 0px;
+}
+
+button {
+    width: 100px;
+    height: 100px;
 }
 
 #header-section, #select-text-section, 
@@ -36,8 +54,11 @@ body {
 }
 
 #combat-section {
+    flex-basis: 650px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
 #combat-left, #combat-right,
@@ -79,6 +100,17 @@ body {
     flex: 1;
 }
 
+.last-weapon-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.last-weapon-icon {
+    flex-basis: 50px;
+    width: 200px;
+    border: 4px solid white;
+}
+
 #combat-last-weapon {
 
 }
@@ -96,7 +128,8 @@ body {
 }
 
 #combat-mid-weapon-select {
-
+    border: 4px solid white;
+    border-radius: 12px;
 }
 
 #combat-mid-textbox {

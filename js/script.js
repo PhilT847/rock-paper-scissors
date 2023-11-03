@@ -1,7 +1,13 @@
 /* script.js */
 
-let playerHealth = 5;
-let computerHealth = 5;
+const CRITICAL_HEALTH_POINT = 0.33;
+
+let gameActive = false;
+
+let playerHealthMax = 12;
+let playerHealthCurrent = playerHealthMax;
+let computerHealthMax = 5;
+let computerHealthCurrent = computerHealthMax;
 
 const selectionContainer = document.querySelector("#select-text-section");
 const selectionText = document.createElement("div");
@@ -10,8 +16,12 @@ const playerContainer = document.querySelector("#combat-left");
 const computerContainer = document.querySelector("#combat-right");
 const playerHealthBar = document.createElement("div");
 const computerHealthBar = document.createElement("div");
+const playerHealthArray = [];
+const computerHealthArray = [];
 
-generateContent();
+const btnList = document.querySelector("ul");
+
+game();
 
 function generateContent() {
 
@@ -19,7 +29,11 @@ function generateContent() {
 
     generateHealthBars();
 
+    generateSelectionButtons();
+
     updateSelectionTextSection();
+
+    updateHealthBars();
 }
 
 function generateHealthBars() {
@@ -43,32 +57,71 @@ function generateHealthBars() {
     computerContainer.appendChild(computerHealthContainer);
     computerHealthContainer.appendChild(computerHealthBar);
 
-    // Create health bars from health pieces = total health
-    for(let i = 0; i < (playerHealth + computerHealth); i++) {
+    // Add all necessary health pieces
+    for(let i = 0; i < playerHealthMax; i++){
 
-        const healthPiece = document.createElement("div");
-        healthPiece.classList.add("health-piece");
-        healthPiece.style.backgroundColor = "rgb(0,255,0)";
+        generateHealthPiece(playerHealthBar, playerHealthArray, i);
+    }
 
-        // Add to both player and computer sides
-        if(i < playerHealth){
+    for(let i = 0; i < computerHealthMax; i++){
 
-            playerHealthBar.appendChild(healthPiece);
-        }
-        else {
+        generateHealthPiece(computerHealthBar, computerHealthArray, i);
+    }
+}
 
-            computerHealthBar.appendChild(healthPiece);
-        }
+function generateHealthPiece(barToAddTo, healthArr, healthPos) {
+
+    const healthPiece = document.createElement("div");
+    healthPiece.classList.add("health-piece");
+    healthPiece.style.backgroundColor = "rgb(0,255,0)";
+
+    // Add to health bar array
+    healthArr[healthPos] = healthPiece;
+
+    //healthArr.add(healthPiece);
+    barToAddTo.appendChild(healthPiece);
+}
+
+function generateSelectionButtons() {
+
+    for(let i = 0; i < 3; i++) {
+
+        const choiceButton = document.createElement("button");
+
+        // Each button plays a different hand
+        choiceButton.addEventListener("click", () => {
+
+            if(gameActive){
+
+                let playerChoice = "";
+
+                switch(i) {
+                    case 0:
+                        playerChoice = "rock";
+                        break;
+                    case 1:
+                        playerChoice = "paper";
+                        break;
+                    case 2:
+                        playerChoice = "scissors";
+                        break;
+                }
+    
+                playRound(playerChoice, getComputerChoice());
+            }
+        });
+
+        btnList.appendChild(choiceButton);
     }
 }
 
 function updateSelectionTextSection() {
 
-    if(playerHealth == 0) {
+    if(computerHealthCurrent == 0) {
 
         selectionText.textContent = "YOU WIN!";
     }
-    else if(computerHealth == 0) {
+    else if(playerHealthCurrent == 0) {
 
         selectionText.textContent = "YOU LOSE!";
     }
@@ -80,48 +133,36 @@ function updateSelectionTextSection() {
 
 function updateHealthBars() {
 
-
+    colorHealthBar(playerHealthCurrent, playerHealthArray);
+    colorHealthBar(computerHealthCurrent, computerHealthArray);
 }
 
-function game() {
+function colorHealthBar(healthCurrent, healthArr) {
+    
+    let healthPercentage = healthCurrent / healthArr.length;
 
-    let playerPoints = 0;
-    let computerPoints = 0;
-    let resultMessage = "";
+    for(let i = 0; i < healthArr.length; i++) {
 
-    for(i = 0; i < 5; i++) {
+        if(i >= healthCurrent) {
 
-        const playerChoice = prompt("Make your selection.").toLowerCase();
-
-        const result = playRound(playerChoice, getComputerChoice());
-        
-        console.log("Result: " + result);
-
-        if(result == "player") {
-            playerPoints++;
+            healthArr[i].style.backgroundColor = "rgb(50,50,50)";
         }
-        else if(result == "computer") {
-            computerPoints++;
+        else {
+
+            if(healthPercentage == 1) {
+
+                healthArr[i].style.backgroundColor = "rgb(0,255,0)";
+            }
+            else if(healthPercentage > CRITICAL_HEALTH_POINT) {
+
+                healthArr[i].style.backgroundColor = "rgb(255,255,0)";
+            }
+            else {
+
+                healthArr[i].style.backgroundColor = "rgb(255,0,0)";
+            }
         }
-        else { // Tie or other result; repeat
-            i--;
-        }
     }
-
-    if(playerPoints > computerPoints){
-
-        resultMessage += "Player wins, " + playerPoints + "-" + computerPoints + "!";
-    }
-    else if(playerPoints < computerPoints) {
-
-        resultMessage += "Player loses, " + playerPoints + "-" + computerPoints + "!";
-    }
-    else {
-
-        resultMessage += "Tied, " + playerPoints + "-" + computerPoints + "!";
-    }
-
-    console.log(resultMessage);
 }
 
 function getComputerChoice() {
@@ -140,9 +181,11 @@ function getComputerChoice() {
 
 function playRound(playerChoice, computerChoice) {
 
-    if(playerChoice === computerChoice) {
+    let result = "";
 
-        return "tie";
+    if(playerChoice == computerChoice) {
+
+        result = "tie";
     }
     else {
 
@@ -151,29 +194,72 @@ function playRound(playerChoice, computerChoice) {
             case "rock":
                 switch(computerChoice){
                     case "paper":
-                        return "computer";
+                        result = "computer";
+                        break;
                     case "scissors":
-                        return "player";
+                        result = "player";
+                        break;
                 }
+                break;
 
             case "paper":
                 switch(computerChoice){
                     case "scissors":
-                        return "computer";
+                        result = "computer";
+                        break;
                     case "rock":
-                        return "player";
+                        result = "player";
+                        break;
                 }
+                break;
 
             case "scissors":
                 switch(computerChoice){
                     case "rock":
-                        return "computer";
+                        result = "computer";
+                        break;
                     case "paper":
-                        return "player";
+                        result = "player";
+                        break;
                 }
+                break;
 
             default:
-                return "tie";
+                result = "tie";
+                break;
         }
     }
+
+    if(result == "player") {
+
+        computerHealthCurrent--;
+    }
+    else if(result == "computer") {
+
+        playerHealthCurrent--;
+    }
+    else {
+
+        console.log("hey");
+    }
+
+    updateHealthBars();
+
+    if(playerHealthCurrent == 0 ||
+        computerHealthCurrent == 0) {
+
+        endGame();
+    }
+}
+
+function endGame() {
+
+    updateSelectionTextSection();
+    gameActive = false;
+}
+
+function game() {
+
+    generateContent();
+    gameActive = true;
 }
